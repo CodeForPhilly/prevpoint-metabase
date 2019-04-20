@@ -5,13 +5,15 @@ services:
     image: postgres
     restart: always
     ports:
-      - 5432:5432
+      - 5433:5432
     environment:
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: metabase
+      POSTGRES_USER: metabase
+      POSTGRES_DB: metabase
       PGDATA: /var/lib/postgresql/data
     volumes:
       # declare your mount volume /host/dir:/container/dir
-      - /home/app/pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
 
   metabase-app:
     image: metabase/metabase
@@ -20,13 +22,13 @@ services:
       - 3001:3000
     volumes:
       # declare your mount volume /host/dir:/container/dir
-      - /home/app/metabase-data:/metabase-data
+      - ./metabase-data:/metabase-data
     environment:
       MB_DB_TYPE: postgres
       MB_DB_DBNAME: metabase
       MB_DB_PORT: 5432
       MB_DB_USER: metabase
-      MB_DB_PASS: postgres
+      MB_DB_PASS: metabase
       MB_DB_HOST: postgres-db
     depends_on:
       - postgres-db
