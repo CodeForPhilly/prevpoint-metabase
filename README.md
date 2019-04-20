@@ -5,6 +5,9 @@ Setup
 -----
 
 ```
-make clean
+make start
 docker-compose up
+
+# run command below to reset database and metabase data
+make clean
 ```
