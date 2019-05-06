@@ -19,3 +19,6 @@ make clean
 Note: the file `setup_data.py` currently dumps the mock data in via pandas.
 If you run into errors, try running `pip3 install requirements.txt`.
 
+Availability 
+-----
+Beta instance available via Linode
