@@ -1,3 +1,4 @@
 pandas
 SQLAlchemy
 psycopg2
+Faker
