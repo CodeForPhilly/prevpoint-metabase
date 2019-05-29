@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: preventionpoint
+  labels:
+    owner: prevention-point
+    env: demo
+    app: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+        owner: prevention-point
+        env: demo
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:latest
+        ports:
+        - containerPort: 5432
+        envFrom:
+        - secretRef:
+            name: prevention-point-metabase
+        volumeMounts:
+        - mountPath: /data/postgres
+          name: postgres-tmp-volume
+      volumes:
+      - name: postgres-tmp-volume
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: preventionpoint
+  labels:
+    owner: prevention-point
+    env: demo
+    app: postgres
+spec:
+  selector:
+    app: postgres
+    owner: prevention-point
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432
