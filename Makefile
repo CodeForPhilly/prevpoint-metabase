@@ -9,6 +9,7 @@ start:
 
 seed:
 	python3 setup_data.py
+	python3 setup_data_intake.py
 
 clean:
 	mkdir -p pgdata metabase-data
