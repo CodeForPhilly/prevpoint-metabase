@@ -5,7 +5,7 @@ from faker.providers import BaseProvider
 import random
 import datetime
 # create sql connection
-engine = create_engine("postgresql://metabase:metabase@localhost:5433/metabase")
+engine = create_engine("postgresql+psycopg2://metabase:metabase@localhost:5499")
 
 fake = Factory.create()
 
